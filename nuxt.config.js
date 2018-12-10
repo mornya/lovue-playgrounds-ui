@@ -39,7 +39,6 @@ module.exports = {
     { src: '@/plugins/google-analytics', ssr: false },
     { src: '@/plugins/localStorage', ssr: false },
     { src: '@/plugins/vee-validate', ssr: false },
-    '@/plugins/vue',
     '@/plugins/vue-events',
     '@/plugins/vuetify',
   ],
@@ -52,6 +51,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
   ],
+
   /*
    ** Axios module configuration
    */
