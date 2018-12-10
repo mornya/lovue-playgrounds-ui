@@ -57,7 +57,6 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: '',
     https: true,
     proxy: true,
     progress: true,
@@ -70,17 +69,11 @@ module.exports = {
 
   proxy: {
     '/api/': {
-      target: 'http://localhost:4500/',
+      //target: 'http://localhost:4500/',
+      target: 'http://lovue-playgrounds-service.herokuapp.com/',
       secure: false,
       pathRewrite: {
         '^/api/': '',
-      },
-    },
-    '/api-server/': {
-      target: 'http://lovue-playgrounds-service/',
-      secure: false,
-      pathRewrite: {
-        '^/api-server/': '',
       },
     },
     '/mock/': {

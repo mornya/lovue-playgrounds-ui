@@ -9,12 +9,12 @@ export default {
   state: initialState(),
   actions: {
     async getUsers ({ commit }) {
-      const result = await this.$axios.$get('/api/users')
+      const result = await this.$axios.$get('api/users')
       commit('setUsers', result)
       return result
     },
     async updateUser ({ commit }, { userId, provider, group, role }) {
-      const result = await this.$axios.$post(`/api/user/${userId}/${provider}`, { group, role })
+      const result = await this.$axios.$post(`api/user/${userId}/${provider}`, { group, role })
       if (result && result.data.isSuccess) {
         commit('updateUser', { userId, provider, group, role })
         return true
@@ -22,7 +22,7 @@ export default {
       return false
     },
     async deleteUser ({ commit }, { userId, provider }) {
-      const result = await this.$axios.$delete(`/api/user/${userId}/${provider}`)
+      const result = await this.$axios.$delete(`api/user/${userId}/${provider}`)
       if (result && result.data.isSuccess) {
         commit('deleteUser', { userId, provider })
       }
