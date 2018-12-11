@@ -6,8 +6,14 @@ export default ({ $axios/*, redirect*/ }) => {
   // Adds header: `Content-Type: application/x-www-form-urlencoded` to only post requests
   $axios.setHeader('Content-Type', 'application/x-www-form-urlencoded', ['post'])
   // Adds header: Authorization
-  const accessToken = getWebToken()
-  $axios.setHeader('authorization', accessToken ? `Bearer ${accessToken}` : null)
+  $axios.onRequest(config => {
+    const accessToken = getWebToken()
+    config.headers = {
+      common: {
+        authorization: accessToken ? `Bearer ${accessToken}` : null,
+      },
+    }
+  })
 
   // 개발환경에서만 적용
   if (process.env.NODE_ENV === 'development') {
