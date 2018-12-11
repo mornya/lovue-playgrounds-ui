@@ -26,10 +26,16 @@ const initialState = () => ({
 export default () => new Store({
   state: initialState(),
   actions: {
-    async setSignIn ({ commit }, { parsedToken }) {
+    async setSignIn ({ commit }, parsedToken) {
       const userId = parsedToken.uid
       const provider = parsedToken.pro
       const result = await this.$axios.$get(`api/user/${userId}/${provider}`)
+      console.log('PARSED TOKEN >>>', {
+        userId,
+        provider,
+        ...result.data.payload.user,
+        privileges: result.data.payload.privileges,
+      })
       commit('setSignIn', {
         userId,
         provider,
