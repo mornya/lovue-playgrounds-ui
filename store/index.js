@@ -65,7 +65,7 @@ export default () => new Store({
           }
 
           // 만료일시 이전일 경우 로그인 상태 저장
-          dispatch('setSignIn', { parsedToken })
+          dispatch('setSignIn', parsedToken)
         }
       }
 
