@@ -2,6 +2,7 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
       <h1>Signin</h1>
+      <p>&nbsp;</p>
       <p v-for="(item, index) in SOCIAL_SIGNIN_ITEMS" :key="index">
         <a href="#" @click.prevent="onClickSocialSignIn(item.target)">
           <img

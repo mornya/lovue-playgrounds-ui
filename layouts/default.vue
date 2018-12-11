@@ -1,36 +1,51 @@
 <template>
   <v-app>
     <v-navigation-drawer
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      fixed
       app
+      fixed
+      v-model="isShowDrawer"
+      :mini-variant.sync="miniVariant"
+      :clipped="clipped"
     >
-      <v-list>
+      <v-list class="pa-0">
+        <v-list-tile avatar>
+          <v-list-tile-avatar>
+            <img
+              :src="CURRENT_USER.photoUrl || 'https://randomuser.me/api/portraits/men/85.jpg'"
+              :alt="CURRENT_USER.userName"
+            />
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ CURRENT_USER.userName || 'John Leider' }}</v-list-tile-title>
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-btn icon @click.stop="miniVariant = !miniVariant">
+              <v-icon>chevron_left</v-icon>
+            </v-btn>
+          </v-list-tile-action>
+        </v-list-tile>
+
         <v-list-tile
-          v-for="(item, i) in items"
+          v-for="(item, index) in menuItems"
           :to="item.to"
-          :key="i"
+          :key="index"
           router
           exact
         >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"/>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"/>
-          </v-list-tile-content>
+          <template v-if="IS_AUTHORIZED(item.role)">
+            <v-list-tile-action>
+              <v-icon v-text="item.icon"/>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="item.label"/>
+            </v-list-tile-content>
+          </template>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
-      <v-toolbar-side-icon @click="drawer = !drawer"/>
+    <v-toolbar app clipped-left fixed>
+      <v-toolbar-side-icon @click="toggleDrawer"/>
       <!--<v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"/>
       </v-btn>
@@ -49,32 +64,41 @@
       </v-container>
     </v-content>
 
-    <v-footer :fixed="fixed" app>
+    <v-footer app>
       <span>&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import Configure from '~/constants/Configure'
 import { getWebToken, saveWebToken, removeWebToken, parseWebToken } from '~/utils/AccessToken'
 
 export default {
   data () {
     return {
+      title: 'Lovue Playgrounds',
+      isShowDrawer: false,
       clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [
-        { icon: 'apps', title: 'Welcome', to: '/' },
-        { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' },
-      ],
       miniVariant: false,
-      title: 'Vuetify.js',
     }
   },
+  computed: {
+    menuItems () {
+      return Configure.menu
+    },
+    ...mapState({
+      CURRENT_USER: state => state.currentUser,
+    }),
+    ...mapGetters({
+      IS_AUTHORIZED: 'isAuthorized',
+    }),
+  },
   methods: {
+    toggleDrawer () {
+      this.isShowDrawer = !this.isShowDrawer
+    },
     messageListener (event) {
       if (event.origin !== Configure.servers.local) {
         if (event.origin === Configure.servers.serviceSSL) {

@@ -1,4 +1,4 @@
-const ServerInfo = {
+const Configure = {
   development: {
     isProduction: false,
     api: {
@@ -29,6 +29,11 @@ const ServerInfo = {
         scope: 'https://www.googleapis.com/auth/adwords',
       },
     },
+    menu: [
+      { icon: 'home', label: 'Welcome', to: '/', role: '' },
+      { icon: 'lock', label: 'Signin', to: '/signin', role: '' },
+      { icon: 'build', label: 'Admin', to: '/admin/users', role: 'ADMIN' },
+    ],
   },
   production: {
     isProduction: true,
@@ -60,7 +65,11 @@ const ServerInfo = {
         scope: 'https://www.googleapis.com/auth/adwords',
       },
     },
+    menu: [
+      { icon: 'apps', title: 'Welcome', to: '/' },
+      { icon: 'signin', title: 'Signin', to: '/signin' },
+    ],
   },
 }
 
-export default ServerInfo[process.env.NODE_ENV] || ServerInfo['development']
+export default Configure[process.env.NODE_ENV] || Configure['development']

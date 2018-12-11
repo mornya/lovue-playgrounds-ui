@@ -82,5 +82,18 @@ export default () => new Store({
       Object.entries(initialStates).forEach(([k, v]) => state[k] = v())
     },
   },
+  getters: {
+    isAuthorized (state) {
+      return (role) => {
+        const userRole = state.currentUser.role
+        if (role && userRole) {
+          const roleIndex = state.userRoles.findIndex(item => item === role)
+          const userRoleIndex = state.userRoles.findIndex(item => item === userRole)
+          return roleIndex !== -1 && userRoleIndex !== -1 && roleIndex <= userRoleIndex
+        }
+        return true
+      }
+    },
+  },
   modules,
 })
