@@ -32,7 +32,7 @@ export default {
   methods: {
     onClickSocialSignIn (target) {
       window.open(
-        `${Configure.servers.API}/auth?provider=${target}&redirectUrl=/`,
+        `${Configure.servers.API}/auth/${target}?redirectUrl=/`,
         `__auth_signin_${target}__`,
         'width=640px, height=640px',
       );
