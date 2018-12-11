@@ -6,6 +6,8 @@ const ServerInfo = {
     },
     servers: {
       local: 'http://localhost:3000',
+      service: 'http://localhost:4500',
+      serviceSSL: 'https://localhost:4430',
       API: '/api',
     },
     // 멀티미디어 업로드 파일크기 제한 (limit은 MB단위)
@@ -35,6 +37,8 @@ const ServerInfo = {
     },
     servers: {
       local: 'https://lovue-playgrounds-ui.herokuapp.com',
+      service: 'https://lovue-playgrounds-service.herokuapp.com',
+      serviceSSL: 'https://lovue-playgrounds-service.herokuapp.com',
       API: 'https://lovue-playgrounds-service.herokuapp.com',
     },
     // 멀티미디어 업로드 파일크기 제한 (limit은 MB단위)

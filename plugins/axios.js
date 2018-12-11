@@ -1,3 +1,5 @@
+import { getWebToken } from '~/utils/AccessToken'
+
 export default ({ $axios/*, redirect*/ }) => {
   // Adds header: `Content-Type: application/json;charset=UTF-8 to default requests
   $axios.setHeader('Content-Type', 'application/json;charset=UTF-8')
@@ -15,6 +17,13 @@ export default ({ $axios/*, redirect*/ }) => {
 
     $axios.onRequest(config => {
       // Do something before request is sent
+      const accessToken = getWebToken()
+      config.headers = {
+        common: {
+          authorization: accessToken ? `Bearer ${accessToken}` : null,
+        },
+      }
+
       const reqOpt = { data: config.data, params: config.params, body: config.body }
       console.log(`[API-REQ] ${config.method.toUpperCase()} ${config.baseURL}${config.url}`, reqOpt)
     })

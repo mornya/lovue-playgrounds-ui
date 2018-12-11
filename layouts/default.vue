@@ -77,7 +77,7 @@ export default {
   methods: {
     messageListener (event) {
       if (event.origin !== Configure.servers.local) {
-        if (event.origin === Configure.servers.API) {
+        if (event.origin === Configure.servers.serviceSSL) {
           const { data } = event
           if (data.isSuccess) {
             saveWebToken(data.payload) // 로컬스토리지에 저장

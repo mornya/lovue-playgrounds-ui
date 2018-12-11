@@ -30,17 +30,11 @@ export default () => new Store({
       const userId = parsedToken.uid
       const provider = parsedToken.pro
       const result = await this.$axios.$get(`/user/${userId}/${provider}`)
-      console.log('PARSED TOKEN >>>', {
-        userId,
-        provider,
-        ...result.data.payload.user,
-        privileges: result.data.payload.privileges,
-      })
       commit('setSignIn', {
         userId,
         provider,
-        ...result.data.payload.user,
-        privileges: result.data.payload.privileges,
+        ...result.payload.user,
+        privileges: result.payload.privileges,
       })
     },
     async setSignOut ({ commit, rootState }) {

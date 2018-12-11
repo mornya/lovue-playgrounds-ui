@@ -68,8 +68,7 @@ module.exports = {
 
   proxy: {
     '/api/': {
-      //target: 'http://localhost:4500/',
-      target: 'https://lovue-playgrounds-service.herokuapp.com',
+      target: 'http://localhost:4500/',
       secure: false,
       pathRewrite: {
         '^/api/': '',
