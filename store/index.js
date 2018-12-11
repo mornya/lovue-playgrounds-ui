@@ -29,7 +29,7 @@ export default () => new Store({
     async setSignIn ({ commit }, parsedToken) {
       const userId = parsedToken.uid
       const provider = parsedToken.pro
-      const result = await this.$axios.$get(`api/user/${userId}/${provider}`)
+      const result = await this.$axios.$get(`/user/${userId}/${provider}`)
       console.log('PARSED TOKEN >>>', {
         userId,
         provider,
@@ -46,11 +46,11 @@ export default () => new Store({
     async setSignOut ({ commit, rootState }) {
       const userId = rootState.currentUser.userId
       const provider = rootState.currentUser.provider
-      await this.$axios.$post(`api/auth/signout`, { userId, provider })
+      await this.$axios.$post(`/auth/signout`, { userId, provider })
       commit('setSignOut')
     },
     async setUserRoles ({ commit }) {
-      const result = await this.$axios.$get('api/userRoles')
+      const result = await this.$axios.$get('/userRoles')
       commit('setUserRoles', result.payload)
     },
     maintainAuth ({ dispatch }, parsedToken) {

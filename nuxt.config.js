@@ -1,4 +1,5 @@
-const pkg = require('./package')
+import pkg from './package'
+import Configure from './constants/Configure'
 
 module.exports = {
   mode: 'universal',
@@ -49,7 +50,6 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
   ],
 
   /*
@@ -57,12 +57,11 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    prefix: Configure.servers.API,
     https: true,
     proxy: true,
     progress: true,
-    retry: {
-      retries: 3,
-    },
+    retry: false,
     credentials: false,
     debug: false,
   },
@@ -70,7 +69,7 @@ module.exports = {
   proxy: {
     '/api/': {
       //target: 'http://localhost:4500/',
-      target: 'http://lovue-playgrounds-service.herokuapp.com/',
+      target: 'https://lovue-playgrounds-service.herokuapp.com',
       secure: false,
       pathRewrite: {
         '^/api/': '',

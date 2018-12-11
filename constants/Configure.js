@@ -6,8 +6,7 @@ const ServerInfo = {
     },
     servers: {
       local: 'http://localhost:3000',
-      API: 'https://lovue-playgrounds-service.herokuapp.com',
-      //API: 'https://localhost:4430', // http=4500
+      API: '/api',
     },
     // 멀티미디어 업로드 파일크기 제한 (limit은 MB단위)
     multimedia: {
