@@ -1,4 +1,4 @@
-import { getWebToken } from '~/utils/AccessToken'
+import { getWebToken } from 'utils/AccessToken'
 
 export default ({ $axios/*, redirect*/ }) => {
   // Adds header: `Content-Type: application/json;charset=UTF-8 to default requests

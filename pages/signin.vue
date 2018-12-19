@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import Configure from '~/constants/Configure'
-import SocialSignIn from '~/constants/SocialSignIn'
+import Configure from 'constants/Configure'
+import SocialSignIn from 'constants/SocialSignIn'
 
 export default {
   computed: {

@@ -29,7 +29,7 @@ module.exports = {
    ** Global CSS
    */
   css: [
-    '~/assets/style/app.styl',
+    'assets/style/app.styl',
   ],
 
   /*
@@ -100,6 +100,9 @@ module.exports = {
           exclude: /(node_modules)/,
         })
       }
+
+      // IDE에서 import 경로를 제대로 못찾는 이슈로 추가함 ("~/"로 경로 잡을 필요 없음)
+      config.resolve.modules.push(config.resolve.alias['~'])
     },
   },
 }

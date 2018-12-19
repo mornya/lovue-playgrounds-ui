@@ -72,8 +72,8 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex'
-import Configure from '~/constants/Configure'
-import { getWebToken, saveWebToken, removeWebToken, parseWebToken } from '~/utils/AccessToken'
+import Configure from 'constants/Configure'
+import { getWebToken, saveWebToken, removeWebToken, parseWebToken } from 'utils/AccessToken'
 
 export default {
   data () {
