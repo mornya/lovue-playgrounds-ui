@@ -102,7 +102,7 @@ module.exports = {
       }
 
       // IDE에서 import 경로를 제대로 못찾는 이슈로 추가함 ("~/"로 경로 잡을 필요 없음)
-      config.resolve.modules.push(config.resolve.alias['~'])
+      config.resolve.modules.unshift(config.resolve.alias['~'])
     },
   },
 }
